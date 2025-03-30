@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject loseUI;
     public TMP_Text loseUIText;
 
+    public AudioSource audioSource;
+
     void Start()
     {
         isPlaying = true;
@@ -86,6 +88,7 @@ public class GameManager : MonoBehaviour
     public void EndGame() {
         isPlaying = false;
         CancelInvoke("EventLoop");
+        audioSource.Stop();
     }
 
     public void Win()

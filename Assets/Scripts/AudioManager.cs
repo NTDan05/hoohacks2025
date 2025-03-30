@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
         {
             audioSource = GetComponent<AudioSource>();
         }
+
+        audioSource.Play();
     }
 
     public void playSoundEffect(int index)

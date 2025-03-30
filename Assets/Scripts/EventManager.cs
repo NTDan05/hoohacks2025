@@ -11,11 +11,14 @@ public class EventManager : MonoBehaviour
     public float hideEventPopupDelay = 5.0f;
     public float eventDuration = 20.0f;
     private int totalEvents = 7;
+    public AudioSource audioSource;
+    public AudioClip eventSoundEffect;
 
     public void TriggerEvent(int eventID)
     {
         ShowEventPopup();
         eventPopupText.text = ""; // Clear previous text
+        audioSource.PlayOneShot(eventSoundEffect);
 
         switch (eventID)
         {

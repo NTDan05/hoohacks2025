@@ -29,6 +29,8 @@ public class GameTree : MonoBehaviour
     [SerializeField] Image foodBar;
     [SerializeField] Slider foodBarSlider;
     [SerializeField] Gradient foodBarGradient;
+    public AudioSource audioSource;
+    public AudioClip growthSoundEffect;
 
     public void Start()
     {
@@ -90,5 +92,6 @@ public class GameTree : MonoBehaviour
     public void AdvanceStage()
     {
         SetStage(stage + 1);
+        audioSource.PlayOneShot(growthSoundEffect);
     }
 }
