@@ -2,3 +2,5 @@ trees (unused): https://admurin.itch.io/nature-trees
 smoke: https://opengameart.org/content/smoke-aura
 trash: https://opengameart.org/content/recycle-items-set
 background image: https://opengameart.org/content/simple-natural-landscape-pixel-art-background
+sound effect: https://mixkit.co/free-sound-effects/game/
+background music: https://pixabay.com/music/beats-chill-lofi-hip-hop-background-music-in-d-minor-262654/
