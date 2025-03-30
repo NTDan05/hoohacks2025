@@ -1,0 +1,3 @@
+trees: https://admurin.itch.io/nature-trees
+smoke: https://opengameart.org/content/smoke-aura
+trash: https://opengameart.org/content/recycle-items-set

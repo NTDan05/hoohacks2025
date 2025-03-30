@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,8 +19,8 @@ public class GameManager : MonoBehaviour
     {
         isPlaying = true;
 
-        Invoke("EventLoop", 30f);
-        eventManager.TriggerEvent(3);
+        Invoke("EventLoop", 15f);
+        // eventManager.TriggerEvent(6);
     }
 
     void Update()
