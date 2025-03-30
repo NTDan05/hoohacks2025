@@ -40,15 +40,6 @@ public class GameTree : MonoBehaviour
         foodLossPerSecond = defaultFoodLossPerSecond;
     }
 
-    public void FixedUpdate()
-    {
-        secondsInStage += Time.fixedDeltaTime;
-        if (secondsInStage >= secondsPerGrowth)
-        {
-            AdvanceStage();
-        }
-    }
-
     public void SetWater(float amount)
     {
         water = amount;

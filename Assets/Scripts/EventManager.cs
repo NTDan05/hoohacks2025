@@ -27,7 +27,7 @@ public class EventManager : MonoBehaviour
                 HeatWave();
                 break;
             case 2:
-                eventPopupText.text = "A sudden storm has passed! Your soil is filled with water.";
+                eventPopupText.text = "A sudden storm appears! Your soil slowly fills with water.";
                 Storm();
                 break;
             case 3:
@@ -50,16 +50,16 @@ public class EventManager : MonoBehaviour
 
     public void HeatWave()
     {
-        tree.AddWater(-tree.maxWater * 0.1f);
-        tree.AddFood(-tree.maxFood * 0.1f);
+        tree.AddWaterPercentage(-0.1f);
+        tree.AddFoodPercentage(-0.1f);
         tree.waterLossPerSecond = tree.defaultWaterLossPerSecond * 3f;
         tree.foodLossPerSecond = tree.defaultFoodLossPerSecond * 3f;
     }
 
     public void Storm()
     {
-        tree.AddWater(tree.maxWater * 0.2f);
-        tree.waterLossPerSecond = tree.defaultWaterLossPerSecond * 0.5f;
+        // soil gains water
+        tree.waterLossPerSecond = -tree.defaultWaterLossPerSecond * 0.75f;
     }
 
     public GameObject smokePrefab;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.SearchService;
 using UnityEngine;
 
@@ -10,6 +11,10 @@ public class GameManager : MonoBehaviour
     public GameTree tree;
     public EventManager eventManager;
     public float secondsBetweenEvents = 30f;
+
+    public GameObject winUI;
+    public GameObject loseUI;
+    public TMP_Text loseUIText;
 
     void Start()
     {
@@ -34,26 +39,37 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        tree.secondsInStage += Time.fixedDeltaTime;
+        if (tree.secondsInStage >= tree.secondsPerGrowth)
+        {
+            if (tree.stage >= tree.stageSprites.Length - 1)
+            {
+                Win(); // reached max stage, win the game!
+                return;
+            }
+            tree.AdvanceStage();
+        }
+
         tree.AddWater(-Time.fixedDeltaTime * tree.waterLossPerSecond);
         tree.AddFood(-Time.fixedDeltaTime * tree.foodLossPerSecond);
 
         // game over conditions
         if (tree.water <= 0)
         {
-            EndGame("tree died, no water.");
+            Lose("Your tree didn't get enough water and died!");
         }
         else if (tree.water > tree.maxWater)
         {
-            EndGame("tree died, over watered.");
+            Lose("Your tree got too much water and died!");
         }
 
         if (tree.food <= 0)
         {
-            EndGame("tree died, no food.");
+            Lose("Your tree didn't get enough nutrients and died!");
         }
         else if (tree.food > tree.maxFood)
         {
-            EndGame("tree died, over fed.");
+            Lose("Your soil was oversaturated, your tree died!");
         }
     }
 
@@ -68,9 +84,21 @@ public class GameManager : MonoBehaviour
         Invoke("EventLoop", secondsBetweenEvents);
     }
 
-    public void EndGame(string message) {
+    public void EndGame() {
         isPlaying = false;
         CancelInvoke("EventLoop");
-        Debug.Log(message);
+    }
+
+    public void Win()
+    {
+        EndGame();
+        winUI.SetActive(true);
+    }
+
+    public void Lose(string message)
+    {
+        EndGame();
+        loseUI.SetActive(true);
+        loseUIText.text = message;
     }
 }
