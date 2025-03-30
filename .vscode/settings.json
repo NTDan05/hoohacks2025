@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "HooHacks Project.sln"
+    "dotnet.defaultSolution": "hoohacks2025.sln"
 }

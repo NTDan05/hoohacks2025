@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class GameTree : MonoBehaviour
 {
     public int stage;
-    public Sprite[] stages;
+    public Sprite[] stageSprites;
+    public SpriteRenderer spriteRenderer;
+    public float secondsPerGrowth = 120f;
+    public float secondsInStage;
+
 
     public float water;
     public float maxWater = 300f;
@@ -25,6 +29,25 @@ public class GameTree : MonoBehaviour
     [SerializeField] Image foodBar;
     [SerializeField] Slider foodBarSlider;
     [SerializeField] Gradient foodBarGradient;
+
+    public void Start()
+    {
+        SetStage(0);
+
+        water = maxWater * startWaterPercent;
+        food = maxFood * startFoodPercent;
+        waterLossPerSecond = defaultWaterLossPerSecond;
+        foodLossPerSecond = defaultFoodLossPerSecond;
+    }
+
+    public void FixedUpdate()
+    {
+        secondsInStage += Time.fixedDeltaTime;
+        if (secondsInStage >= secondsPerGrowth)
+        {
+            AdvanceStage();
+        }
+    }
 
     public void SetWater(float amount)
     {
@@ -60,5 +83,21 @@ public class GameTree : MonoBehaviour
     public void AddFoodPercentage(float percentage)
     {
         AddFood(maxFood * percentage);
+    }
+
+    public void SetStage(int stage) {
+        this.stage = stage;
+        secondsInStage = 0f;
+
+        if (stage < 0 || stage >= stageSprites.Length)
+        {
+            return;
+        }
+        spriteRenderer.sprite = stageSprites[stage];
+    }
+
+    public void AdvanceStage()
+    {
+        SetStage(stage + 1);
     }
 }

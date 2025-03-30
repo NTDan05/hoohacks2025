@@ -9,8 +9,9 @@ public class EventManager : MonoBehaviour
     public GameObject eventPopup;
     public TMP_Text eventPopupText;
     public float hideEventPopupDelay = 5.0f;
-    public float eventDuration = 30.0f;
-    private int totalEvents = 3;
+    public float eventDuration = 20.0f;
+    private int totalEvents = 4;
+
     public void TriggerEvent(int eventID)
     {
         ShowEventPopup();
@@ -28,6 +29,10 @@ public class EventManager : MonoBehaviour
             case 2:
                 eventPopupText.text = "A sudden storm has passed! Your soil is filled with water.";
                 Storm();
+                break;
+            case 3:
+                eventPopupText.text = "Because of air pollution, smoke is everywhere! Click on one to remove it!";
+                Smoke();
                 break;
             default:
                 Debug.Log("No event exists for ID: " + eventID);
@@ -55,6 +60,15 @@ public class EventManager : MonoBehaviour
     {
         tree.AddWater(tree.maxWater * 0.2f);
         tree.waterLossPerSecond = tree.defaultWaterLossPerSecond * 0.5f;
+    }
+
+    public GameObject smokePrefab;
+    public void Smoke()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Instantiate(smokePrefab, new Vector2(Random.Range(-6.0f, 6.0f), Random.Range(-2.0f, 2.0f)), Quaternion.identity);
+        }
     }
 
     public void ResetLossRates()

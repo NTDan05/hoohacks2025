@@ -9,17 +9,14 @@ public class GameManager : MonoBehaviour
     bool isPlaying; 
     public GameTree tree;
     public EventManager eventManager;
-    public float secondsBetweenEvents = 60f;
+    public float secondsBetweenEvents = 30f;
 
     void Start()
     {
         isPlaying = true;
-        tree.water = tree.maxWater * tree.startWaterPercent;
-        tree.food = tree.maxFood * tree.startFoodPercent;
-        tree.waterLossPerSecond = tree.defaultWaterLossPerSecond;
-        tree.foodLossPerSecond = tree.defaultFoodLossPerSecond;
 
         Invoke("EventLoop", 30f);
+        eventManager.TriggerEvent(3);
     }
 
     void Update()
@@ -37,8 +34,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        tree.AddWater(-Time.deltaTime * tree.waterLossPerSecond);
-        tree.AddFood(-Time.deltaTime * tree.foodLossPerSecond);
+        tree.AddWater(-Time.fixedDeltaTime * tree.waterLossPerSecond);
+        tree.AddFood(-Time.fixedDeltaTime * tree.foodLossPerSecond);
 
         // game over conditions
         if (tree.water <= 0)
